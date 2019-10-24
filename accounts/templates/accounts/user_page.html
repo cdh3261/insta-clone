@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>{{user_info.username}}님의 페이지입니다.</h1>
+    <h6 class="card-subtitle mb-2 text-muted my-3">팔로워 : {{user_info.followers.all | length}}  팔로잉 : {{user_info.followings.all | length}}</h6>
+
+    {% if user.is_authenticated and user != user_info %}
+        <a href="{% url 'accounts:follow' user_info.id %}">Follow</a>
+    {% else %}
+        
+        <a href="{% url 'accounts:update' %}">정보수정</a>
+        <a href="{% url 'accounts:password' %}">비밀번호변경</a>
+
+        <div class='row justify-content-end'>
+            <form action="{% url 'accounts:delete' user_info.id %}" method='post'>
+                <input type="submit" value='탈퇴' class='btn btn-warning '>
+            </form>
+        </div>
+
+
+
+    {% endif %}
+{% endblock %}

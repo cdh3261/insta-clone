@@ -1,0 +1,17 @@
+{% load make_link %}
+
+<div class="card col-6">
+    <img src="{{post.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text">{{post|hashtag_link|safe}}</p>
+      {% if user in post.like_users.all %}
+        <a href="{% url 'posts:like' post.id %}" class="btn btn-primary">좋아요취소{{post.like_users.all.count}}</a>
+      {% else %}
+        <a href="{% url 'posts:like' post.id %}" class="btn btn-primary">좋아요{{post.like_users.all.count}}</a>
+      {% endif %}
+
+      
+
+    </div>
+  </div>
